@@ -1,0 +1,123 @@
+:root{
+    --border: 2px solid #33322E;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #ebf7fc; 
+    margin: 0;
+}
+
+.fondo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 90%;
+    height: 90vh;
+    background-image: url("/recursos/fondo_todolist.svg");
+    background-size: 200px;
+    background-repeat: repeat;
+    opacity: 0.08;
+}
+
+.app{
+    width: 100%;
+    margin: 40px auto;
+}
+
+.header{
+    margin: 0 418px 24px 418px;
+}
+
+.titulo{
+    position: relative;
+    text-align: center;
+    margin: 0 auto 12px;
+    width: 200px;
+}
+
+.animacion{
+    position: absolute;
+    left: -60px; /* Lo mueve a la izquierda de la palabra TODO */
+    top: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.animacion span {
+    transform: rotateZ(45deg); /* Rota el cuadradito para que se vea como rombo */
+    margin: 0 7px;
+    width: 7px;
+    height: 7px;
+    border: 2px solid #33322E; 
+    background-color: #ffd6e9;
+    
+    display: inline-block;
+    border-radius: 1px;
+    
+    animation: zooming 8s ease-in-out infinite;
+}
+
+.animacion span:nth-child(2) {
+    animation-delay: 2s;
+}
+
+@keyframes zooming {
+    0% { transform: scale(1) rotateZ(45deg); }
+    20% { transform: scale(1) rotateZ(45deg); }
+    30% { transform: scale(1) rotateZ(135deg); }
+    70% { transform: scale(1) rotateZ(135deg); }
+    80% { transform: scale(1) rotateZ(45deg); }
+    100% { transform: scale(1) rotateZ(45deg); }
+}
+
+.pendulo{
+    position: absolute;
+    right: -40px;
+    top: 0;
+}
+
+.buscador{
+    position: relative;
+}
+
+.agregar-item{
+    width: 100%;
+    height: 64px;
+    cursor: text;
+    font-size: 18px;
+    border: var(--border);
+    border-radius: 12px;
+    box-sizing: border-box;
+    padding-left: 12px; 
+    padding-right: 100px; 
+    box-shadow: 4px 4px 0px #33322E; 
+    transition: box-shadow 0.3s ease;
+}
+
+.agregar-item:hover{
+    box-shadow: none;
+}
+
+.btn-agregar{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 98px;
+    font-size: 18px;
+    background-color: #ffd6e9;
+    border: var(--border);
+    border-left: var(--border);
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+

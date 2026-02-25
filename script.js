@@ -16,7 +16,7 @@ function mostrarTarea(textoDeLaTarea) {
     divTarea.innerHTML= `
     <button class="btn-completar"></button>
     <span class="texto-tarea">${textoDeLaTarea}</span>
-    <button class="btn-eliminar">X</>
+    <button class="btn-eliminar">X</button>
     `;
 
     cajaTareas.appendChild(divTarea);

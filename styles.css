@@ -43,7 +43,7 @@ body{
 
 .animacion{
     position: absolute;
-    left: -60px; /* Lo mueve a la izquierda de la palabra TODO */
+    left: -60px; 
     top: 4px;
     display: flex;
     justify-content: center;
@@ -51,7 +51,7 @@ body{
 }
 
 .animacion span {
-    transform: rotateZ(45deg); /* Rota el cuadradito para que se vea como rombo */
+    transform: rotateZ(45deg);
     margin: 0 7px;
     width: 7px;
     height: 7px;
@@ -66,15 +66,6 @@ body{
 
 .animacion span:nth-child(2) {
     animation-delay: 2s;
-}
-
-@keyframes zooming {
-    0% { transform: scale(1) rotateZ(45deg); }
-    20% { transform: scale(1) rotateZ(45deg); }
-    30% { transform: scale(1) rotateZ(135deg); }
-    70% { transform: scale(1) rotateZ(135deg); }
-    80% { transform: scale(1) rotateZ(45deg); }
-    100% { transform: scale(1) rotateZ(45deg); }
 }
 
 .pendulo{
@@ -121,3 +112,103 @@ body{
     transition: all 0.25s;
 }
 
+.caja-principal {
+    background-color: #ffffff; 
+    border: var(--border); 
+    border-radius: 12px; 
+    box-shadow: 4px 4px 0px #33322E;
+    margin-top: 30px; 
+    overflow: hidden; 
+    max-width: 700px;
+    margin: 30px auto 0 auto;
+}
+
+.caja-encabezado {
+    border-bottom: var(--border);
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.caja-contenido {
+    padding: 30px 40px;
+    min-height: 280px;
+    color: #606060;
+}
+
+.mensaje-vacio {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.consejos p {
+    margin-bottom: 12px;
+}
+
+.consejos ul {
+    list-style: none;
+}
+
+.consejos li {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.caja-pie {
+    border-top: var(--border);
+    height: 44px;
+}
+
+
+.tarea-item {
+    display: flex;
+    align-items: center;
+    background-color: #F9F3E5;
+    border: var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: 16px;
+    box-shadow: 4px 4px 0px #33322E;
+    transition: box-shadow 0.3s ease;
+}
+
+.tarea-item:hover {
+    box-shadow: none;
+}
+
+.btn-completar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: var(--border);
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.texto-tarea {
+    flex-grow: 1;
+    margin: 0 16px;
+    font-size: 20px;
+    color: #080808;
+    font-weight: 500;
+}
+
+.btn-eliminar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: var(--border);
+    background-color: white;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: #33322E;
+    box-shadow: 4px 4px 0px #33322E;
+    transition: box-shadow 0.3s ease;
+}
+
+.btn-eliminar:hover{
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #33322E;
+    background-color: red;
+}

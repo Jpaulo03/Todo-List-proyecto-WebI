@@ -57,6 +57,7 @@ app.post("/api/todos", [
     }
 });
 
+
 app.get("/api/todos", async (req, res, next) => {
     try{
         const [rows] = await pool.query("SELECT id, title, completed FROM tareas ORDER BY id DESC");
@@ -88,6 +89,30 @@ app.put("/api/todos/:id", [
         }
 
         res.json({ data: { message: "Tarea actualizada correctamente" }, error: null });
+    } catch (e) {
+        next(e);
+    }
+});
+
+app.put("/api/todos/:id/title", [
+    param("id").isInt({ min: 1 }).withMessage("ID inválido"),
+    body("title").isString().notEmpty().withMessage("El título es obligatorio")
+], async (req, res, next) => {
+    try {
+        validar(req);
+        const { id } = req.params;
+        const { title } = req.body;
+
+        const [result] = await pool.query(
+            "UPDATE tareas SET title = ? WHERE id = ?",
+            [title, id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ data: null, error: { message: "Tarea no encontrada" } });
+        }
+
+        res.json({ data: { message: "Título actualizado" }, error: null });
     } catch (e) {
         next(e);
     }

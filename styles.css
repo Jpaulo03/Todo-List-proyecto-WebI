@@ -212,3 +212,22 @@ body{
     box-shadow: 6px 6px 0px #33322E;
     background-color: red;
 }
+
+.btn-editar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: var(--border);
+    background-color: #ffd6e9; 
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    box-shadow: 4px 4px 0px #33322E;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.btn-editar:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #33322E;
+    background-color: #ffb3d9;
+}

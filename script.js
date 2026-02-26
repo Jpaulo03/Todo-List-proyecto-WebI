@@ -18,10 +18,11 @@ function mostrarTarea(tarea) {
     divTarea.innerHTML = `
     <button class="btn-completar"></button>
     <span class="texto-tarea">${tarea.title}</span>
-    <button class="btn-eliminar">X</button>
+    <button class="btn-editar">✏️</button> <button class="btn-eliminar">X</button>
     `;
 
     const btnCompletar = divTarea.querySelector(".btn-completar");
+    const btnEditar = divTarea.querySelector(".btn-editar")
     const btnEliminar = divTarea.querySelector(".btn-eliminar");
     const spanTexto = divTarea.querySelector(".texto-tarea");
 
@@ -61,6 +62,29 @@ function mostrarTarea(tarea) {
         }
     });
 
+    // EVENTO: EDITAR TEXTO DE LA TAREA
+    btnEditar.addEventListener("click", async () => {
+        const nuevoTexto = prompt("Edita tu tarea:", spanTexto.textContent);
+
+        if (nuevoTexto !== null && nuevoTexto.trim() !== "" && nuevoTexto.trim() !== spanTexto.textContent) {
+            try {
+                const respuesta = await fetch(`${API_URL}/${tarea.id}/title`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ title: nuevoTexto.trim() })
+                });
+
+                if (respuesta.ok) {
+                    spanTexto.textContent = nuevoTexto.trim();
+                } else {
+                    alert("Hubo un error al editar la tarea en el servidor.");
+                }
+            } catch (error) {
+                console.error("Error de conexión al editar:", error);
+                alert("No se pudo conectar con la base de datos.");
+            }
+        }
+    });
     
     btnEliminar.addEventListener("click", async () => {
         try {

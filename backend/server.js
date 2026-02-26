@@ -6,7 +6,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const mysql = require("mysql2/promise");
-const { body, validationResult } = require("express-validator");
+const { body, param, validationResult } = require("express-validator");
 
 const app = express();
 
@@ -65,6 +65,49 @@ app.get("/api/todos", async (req, res, next) => {
             error: null
         });
     } catch (e){
+        next(e);
+    }
+});
+
+app.put("/api/todos/:id", [
+    param("id").isInt({ min: 1 }).withMessage("ID inválido"),
+    body("completed").isBoolean().withMessage("Debe ser un valor booleano (true/false)")
+], async (req, res, next) => {
+    try {
+        validar(req);
+        const { id } = req.params; 
+        const { completed } = req.body; 
+
+        const [result] = await pool.query(
+            "UPDATE tareas SET completed = ? WHERE id = ?",
+            [completed ? 1 : 0, id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ data: null, error: { message: "Tarea no encontrada" } });
+        }
+
+        res.json({ data: { message: "Tarea actualizada correctamente" }, error: null });
+    } catch (e) {
+        next(e);
+    }
+});
+
+app.delete("/api/todos/:id", [
+    param("id").isInt({ min: 1 }).withMessage("ID inválido")
+], async (req, res, next) => {
+    try {
+        validar(req);
+        const { id } = req.params;
+
+        const [result] = await pool.query("DELETE FROM tareas WHERE id = ?", [id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ data: null, error: { message: "Tarea no encontrada" } });
+        }
+
+        res.json({ data: { message: "Tarea eliminada" }, error: null });
+    } catch (e) {
         next(e);
     }
 });

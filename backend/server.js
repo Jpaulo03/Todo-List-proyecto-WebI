@@ -57,6 +57,18 @@ app.post("/api/todos", [
     }
 });
 
+app.get("/api/todos", async (req, res, next) => {
+    try{
+        const [rows] = await pool.query("SELECT id, title, completed FROM tareas ORDER BY id DESC");
+        res.json ({
+            data: rows,
+            error: null
+        });
+    } catch (e){
+        next(e);
+    }
+});
+
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(err.status || 500).json({
@@ -70,5 +82,5 @@ app.use((err, req, res, next) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
